@@ -1,0 +1,136 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <title>NYT</title>
+</head>
+  <body>
+
+    <!-- Container -->
+    <div class="container">
+    <!-- class jumbotron -->
+      <div class="jumbotron">
+        <h1>New York Times Search!</h1>
+      </div>
+      <!-- row -->
+      <div class="row">
+
+          <div class="col-lg-12">
+            <!-- search parameters panel -->
+              <div class="panel panel-default">
+
+                  <div class="panel-heading">
+                      <h3 class="panel-title">Search Parameters</h3>
+                  </div>
+
+                  <form>
+
+                      <div class="form-group">
+                        <label for="search">Search Terms</label>
+                        <input type="text" class="form-control" id="search" placeholder="What's in your mind?">
+                      </div>
+                      <div class="form-group">
+                          <label for="sel1">Nr. of records retrieved</label>
+                          <select class="form-control" id="sel1">
+                          <option value="nr1">1</option>
+                          <option value="nr5" selected>5</option>
+                          <option value="nr10">10</option>
+                        </select>
+                      </div>
+
+                      <div class="form-group">
+                          <label for="startYear">Start Year</label>
+                          <input type="text" class="form-control" id="startYear" placeholder="What's in your mind?">
+                      </div>
+
+                      
+
+                      <div class="form-group">
+                        <label for="endYear">End Year</label>
+                        <input type="text" class="form-control" id="endYear" placeholder="What's in your mind?">
+                      </div>
+
+                      <button type="submit" class="btn btn-primary">Go.</button>
+                      <button type="button" class="btn btn-primary">Reset</button>
+
+                    </form>
+
+                  <div class="panel-body">
+                      Input
+                  </div>
+
+              </div>
+
+          </div>
+
+      </div>
+
+      <div class="row">
+
+          <div class="col-lg-12">
+        <!-- results panel --> 
+          <div class="panel panel-default">
+
+            <div class="panel-heading">
+                <h3 class="panel-title">Search Results</h3>
+            </div>
+
+            <form>
+              <div class="form-group">
+                <label for="search">Search</label>
+                <input type="text" class="form-control" id="search" placeholder="What's in your mind?">
+              </div>
+
+              <button type="submit" class="btn btn-primary">Go.</button>
+
+            </form>
+
+            <div class="panel-body">
+              <div class="well">
+                <h2>Year Founded</h2>
+                <h1>Founder's Name</h1>
+                <h4>Company History</h4>
+                <h5>Company World Impact</h5>
+              </div>
+            </div>
+
+          </div>
+          
+      </div>
+
+    </div>
+
+    <script type="text/javascript">
+    
+        var search = $("#search").val().trim; //q
+        var numberOfSearches = $("#sel1").val(); //page
+        var startYear = $("#statYear").val().trim; //begin_date
+        var endYear = $("#endYear").val().trim;//end_date
+            console.log();
+
+        var queryURL = "https://api.nytimes.com/svc/search/v2/articlesearch.json?q=" + search + "&page=" + numberOfSearches + "&begin_date=" + startYear + "&end_date=" + endYear + "api_key=057eeb73a67c45ef8b09426a72cce2a4"
+    
+        $.ajax({
+            url: queryURL,
+            method: "GET"
+        }).then(function(response){
+            console.log(response);
+            console.log(response.response.docs[0].headline.main);
+        });
+    
+        var results = response.response
+
+
+
+    </script>
+
+  </body>
+</html>
